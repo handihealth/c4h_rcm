@@ -60,31 +60,31 @@ The session should be formally closed when you are finished.
 
 ````
 
-###B. Retrieve Patient’s ehrId from Ehrscape based on their subjectId
+### B. Retrieve Patient’s ehrId from Ehrscape based on their subjectId
 
 We now need to retrieve the patient’s internal `ehrID` associated with their subjectId. The ehrID is a unique string which, for security reasons, cannot be associated with the patient, if for instance their openEHR records were leaked.
 
-#####Call: Returns the EHR for the specified subject ID and namespace.
+##### Call: Returns the EHR for the specified subject ID and namespace.
 ````
 GET /rest/v1/ehr/?subjectId={{subjectId}}&subjectNamespace={{subjectNamespace}}
 Headers:
- Her-Session: {{sessionId}} //The value of the sessionId
+ Ehr-Session: {{sessionId}} //The value of the sessionId
 ````
-#####Return:
+##### Return:
 ````son
 {
   “ehrId”: “0da489ee-c0ae-4653-9074-57b7f63c9f16”
 }
 ````
 
-###C. Retrieve the compositionId of Patient’s most recent Remote Chemotherapy Monitoring Report composition
+### C. Retrieve the compositionId of Patient’s most recent Remote Chemotherapy Monitoring Report composition
 
 Now that we have the patient’s `ehrId` we can use it to locate their existing records.
 We use an Archetype Query Language (AQL) call to retrieve a list of the identifiers and dates of existing Remote Chemotherapy Monitoring Report ``composition`` records. Compositions are document-level records which act as the container for all openEHR patient data.
 
-The `name/value` of the Composition is the root name of the templates composition archetype `` (case-sensitive). In a real-world example we would query on other factors to ensure we had the ‘correct’ list.
+The `name/value` of the Composition is the root name of the templates composition archetype (case-sensitive). In a real-world example we would query on other factors to ensure we had the ‘correct’ list.
 
-#####AQL statement
+##### AQL statement
 
 ````
 select
@@ -100,15 +100,15 @@ The query API call returns a `results` which is a nested set of name/value pairs
 
 The `compositionId` element in the response is the unique identifier for the composition and `start_time` is the time that the document was authored.
 
-#####Call: Run AQL query and return a Resultset
+##### Call: Run AQL query and return a Resultset
 ````
-GGET /rest/v1/query?aql=select a/uid/value as compositionId, a/context/start_time/value as start_time from EHR e[ehr_id/value=‘7dfbbeab-d49e-42bf-9f6e-a23d5b55e812’] contains COMPOSITION a[openEHR-EHR-COMPOSITION.report.v1] where a/name/value=‘Patient Remote Chemo monitoring’ order by a/context/start_time/value desc offset 0 limit 1
+GET /rest/v1/query?aql=select a/uid/value as compositionId, a/context/start_time/value as start_time from EHR e[ehr_id/value=‘7dfbbeab-d49e-42bf-9f6e-a23d5b55e812’] contains COMPOSITION a[openEHR-EHR-COMPOSITION.report.v1] where a/name/value=‘Patient Remote Chemo monitoring’ order by a/context/start_time/value desc offset 0 limit 1
 Headers:
- Her-Session: {{sessionId}} //The value of the sessionId
+ Ehr-Session: {{sessionId}} //The value of the sessionId
 ````
 
-#####Return:
-````son
+##### Return:
+````json
 {
   “meta”: {
     “href”: “https://ehrscape.code-4-health.org/rest/v1/query/?aql=select%20%20%20%20%20a/uid/value%20as%20compositionId,%20%20%20%20%20a/context/start_time/value%20as%20start_time%20from%20EHR%20e%5Behr_id/value%3D'5d685333-147f-4aa0-bf1d-e746a5d846b1’%5D%20contains%20COMPOSITION%20a%5BopenEHR-EHR-COMPOSITION.report.v1%5D%20where%20a/name/value%3D’Patient%20Remote%20Chemo%20monitoring’%20order%20by%20a/context/start_time/value%20desc%20offset%200%20limit%201”
@@ -124,19 +124,19 @@ Headers:
 }
 ````
 
-###C. Retrieve the Patient’s most recent ‘Patient Remote Chemo monitoring’ composition
+### C. Retrieve the Patient’s most recent ‘Patient Remote Chemo monitoring’ composition
 
 We will use the results of the previous query to retrieve one of the compositions via its ‘’compositionId’’.
 
-#####Call: Returns the specified Composition in FLAT JSON format.
+##### Call: Returns the specified Composition in FLAT JSON format.
 ````
 GET /rest/v1/composition/435e6808-9a7e-4805-bef6-a20c28ba48cb::c4h_rcm.ehrscape.com::2?format=FLAT
 Headers:
- Her-Session: {{sessionId}} //The value of the sessionId
+ Ehr-Session: {{sessionId}} //The value of the sessionId
  Content-Type: application/json
 ````
-#####Return:
-````son
+##### Return:
+````json
 {
     “meta”: {
         “href”: “https://ehrscape.code-4-health.org/rest/v1/composition/8263bdaf-a9de-4141-98e5-ae912078b2d4::c4h_ripple_rcm.ehrscape.com::1”
@@ -196,10 +196,10 @@ Headers:
     },
     “deleted”: false,
     “lastVersion”: true
-}````
+}
+````
 
-
-###D. Persist an new instance of the Patient Remote Chemo monitoring Composition as a POST
+### D. Persist an new instance of the Patient Remote Chemo monitoring Composition as a POST
 
 All openEHR data is persisted as a COMPOSITION (document) class. openEHR data can be highly structured and potentially complex. To simplify the challenge of persisting openEHR data, examples of  ‘target composition’ data instances have been provided in the Ehrscape ``FLAT JSON`` format.
 
@@ -214,14 +214,15 @@ In other scenarios we might want to, for example, **maintain only a single insta
 
 e.g. `798e27b1-f2e8-48c3-8ced-42d4d27d1db3::answer.hopd.com::2`
 
-#####Call: Creates a new opener composition and returns the new CompositionId
+##### Call: Creates a new openEHR composition and returns the new CompositionId
 ````
 POST /rest/v1/composition?ehrId=7dfbbeab-d49e-42bf-9f6e-a23d5b55e812&templateId=Ripple RCM - Chemo monitoring Report&committerName=handi&format=FLAT HTTP/1.1
 
 Headers:
- Her-Session: {{sessionId}} //The value of the sessionId
+ Ehr-Session: {{sessionId}} //The value of the sessionId
  Content-Type: application/json
-
+````
+````json
 {
     “ctx/language”: “en”,
     “ctx/territory”: “GB”,
@@ -260,30 +261,37 @@ Headers:
 	   “patient_remote_chemo_monitoring/howru_score/dependent_on_others|ordinal”: 2,
 	   “patient_remote_chemo_monitoring/howru_score/summary_score”: 10
 }
-  #####Return:
-  ````son{
+````
+
+  ##### Return:
+  ````json
+  {
       “meta”: {
           “href”: “https://ehrscape.code-4-health.org/rest/v1/composition/c811104e-1f69-4405-afe0-182654063c9c::c4h_rcm.ehrscape.com::1”
       },
       “action”: “CREATE”,
       “compositionUid”: “c811104e-1f69-4405-afe0-182654063c9c::c4h_rcm.ehrscape.com::1”
   }
-
-
-#####Call: Run AQL query and return a Resultset
-
-This AQL call returns a set of key data points from recent Patient Remote Chemo monitoring Compositions. The `results’ is a simple nested name/value pair structure whose exact format is determined by the query itself. Either single data points or objects can be  returned.`
-
 ````
+
+### D. Run an AQL query with key values
+
+This AQL query eturns a flattened Resultset with key values from recent compositions.  
+
+##### Call: Run AQL query and return a Resultset
+
+This AQL call returns a set of key data points from recent Patient Remote Chemo monitoring Compositions. The `results’ is a simple nested name/value pair structure whose exact format is determined by the query itself. Either single data points or objects can be  returned.
+
+````json
 GET /rest/v1/query?aql=select     b_a/data[at0002]/events[at0003]/data[at0001]/items[at0004]/value/magnitude as Heart_Rate_magnitude,     b_b/data[at0001]/events[at0002]/data[at0003]/items[at0006]/value/numerator as spO2_numerator,     b_c/data[at0002]/events[at0003]/data[at0001]/items[at0004]/value/magnitude as Temperature_magnitude,     b_d/data[at0001]/events[at0006]/data[at0003]/items[at0004]/value/magnitude as Systolic_magnitude,     b_d/data[at0001]/events[at0006]/data[at0003]/items[at0005]/value/magnitude as Diastolic_magnitude,     b_f as Symptom,     b_g/data[at0001]/events[at0002]/data[at0003]/items[at0004, ‘Comments’]/value as Comments,     a/uid/value as did,     a/context/start_time/value as Date from EHR e[ehr_id/value=‘7dfbbeab-d49e-42bf-9f6e-a23d5b55e812’] contains COMPOSITION a[openEHR-EHR-COMPOSITION.report.v1] contains (     OBSERVATION b_a[openEHR-EHR-OBSERVATION.pulse.v0] or     OBSERVATION b_b[openEHR-EHR-OBSERVATION.indirect_oximetry.v1] or     OBSERVATION b_c[openEHR-EHR-OBSERVATION.body_temperature.v1] or     OBSERVATION b_d[openEHR-EHR-OBSERVATION.blood_pressure.v1] or     CLUSTER b_f[openEHR-EHR-CLUSTER.symptom.v0] or     OBSERVATION b_g[openEHR-EHR-OBSERVATION.story.v1]) where a/name/value=‘Patient Remote Chemo monitoring’ order by a/context/start_time/value desc offset 0 limit 100
 
 Headers:
- Her-Session: {{sessionId}} //The value of the sessionId
+ Ehr-Session: {{sessionId}} //The value of the sessionId
 ````
 
-#####Return:
-````son
-…
+##### Return:
+````json
+
 “resultSet”: [
   {
     “did”: “435e6808-9a7e-4805-bef6-a20c28ba48cb::c4h_rcm.ehrscape.com::2”,
@@ -525,15 +533,15 @@ Headers:
 ]
 ````
 
-### F. Close the Ehrscape session
+### E. Close the Ehrscape session
 
 The last step in working with Ehrscape is to close the session.
 
-#####Call: Close the openEHR session:
+##### Call: Close the openEHR session:
  ````
  DELETE /rest/v1/session?sessionId={{sessionId}}
  ````
-#####Returns:
+##### Returns:
 ````json
 {
   "sessionId": "2dcd6528-0471-4950-82fa-a018272f1339"
