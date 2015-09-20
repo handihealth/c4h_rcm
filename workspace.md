@@ -4,7 +4,7 @@ Ehrscape Explorer: `https://ehrscape.code-4-health.org/explorer`
 Ehrscape API Explorer: `https://ehrscape.code-4-health.org/api-explorer`  
 Ehrscape REST API Root: `https://ehrscape.code-4-health.org/rest/v1`  
 
-## Ripple RCM Ehrscape subdomain **
+## Ripple RCM Ehrscape subdomain
 
 login: ch4_ripple_rcm
 password:OMeSchAR
