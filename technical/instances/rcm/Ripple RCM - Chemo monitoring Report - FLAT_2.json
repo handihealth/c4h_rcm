@@ -22,5 +22,17 @@
     "patient_remote_chemo_monitoring/symptoms/symptom:0/symptom_name|value": "Pain",
     "patient_remote_chemo_monitoring/symptoms/symptom:1/symptom_name|code": "422587007",
     "patient_remote_chemo_monitoring/symptoms/symptom:1/symptom_name|value": "Nausea",
-   	"patient_remote_chemo_monitoring/mascc_risk_score/mascc_risk_score": 18
+	  "patient_remote_chemo_monitoring/howru_score/pain_or_discomfort|code": "at0042",
+	   "patient_remote_chemo_monitoring/howru_score/pain_or_discomfort|value": "quite a lot",
+	   "patient_remote_chemo_monitoring/howru_score/pain_or_discomfort|ordinal": 2,
+	   "patient_remote_chemo_monitoring/howru_score/feeling_low_or_worried|code": "at0043",
+	   "patient_remote_chemo_monitoring/howru_score/feeling_low_or_worried|value": "extreme",
+	   "patient_remote_chemo_monitoring/howru_score/feeling_low_or_worried|ordinal": 3,
+	   "patient_remote_chemo_monitoring/howru_score/limited_in_what_i_can_do|code": "at0043",
+	   "patient_remote_chemo_monitoring/howru_score/limited_in_what_i_can_do|value": "extreme",
+	   "patient_remote_chemo_monitoring/howru_score/limited_in_what_i_can_do|ordinal": 3,
+	   "patient_remote_chemo_monitoring/howru_score/dependent_on_others|code": "at0042",
+	   "patient_remote_chemo_monitoring/howru_score/dependent_on_others|value": "quite a lot",
+	   "patient_remote_chemo_monitoring/howru_score/dependent_on_others|ordinal": 2,
+	   "patient_remote_chemo_monitoring/howru_score/summary_score": 10
 }

@@ -1,0 +1,1337 @@
+{
+    "meta": {
+        "href": "https://ehrscape.code-4-health.org/rest/v1/template/Ripple%20RCM%20-%20Chemo%20monitoring%20Report"
+    },
+    "webTemplate": {
+        "templateId": "Ripple RCM - Chemo monitoring Report",
+        "version": "2.3",
+        "defaultLanguage": "en",
+        "languages": [
+            "en"
+        ],
+        "tree": {
+            "id": "patient_remote_chemo_monitoring",
+            "name": "Patient Remote Chemo monitoring",
+            "localizedName": "Patient Remote Chemo monitoring",
+            "rmType": "COMPOSITION",
+            "nodeId": "openEHR-EHR-COMPOSITION.report.v1",
+            "min": 1,
+            "max": 1,
+            "localizedNames": {
+                "en": "Patient Remote Chemo monitoring"
+            },
+            "localizedDescriptions": {
+                "en": "Document to communicate information to others, commonly in response to a request from another party."
+            },
+            "aqlPath": "",
+            "children": [
+                {
+                    "id": "context",
+                    "rmType": "EVENT_CONTEXT",
+                    "nodeId": "",
+                    "min": 1,
+                    "max": 1,
+                    "aqlPath": "/context",
+                    "children": [
+                        {
+                            "id": "start_time",
+                            "name": "Start_time",
+                            "rmType": "DV_DATE_TIME",
+                            "min": 1,
+                            "max": 1,
+                            "aqlPath": "/context/start_time",
+                            "inputs": [
+                                {
+                                    "type": "DATETIME"
+                                }
+                            ],
+                            "inContext": true
+                        },
+                        {
+                            "id": "setting",
+                            "name": "Setting",
+                            "rmType": "DV_CODED_TEXT",
+                            "min": 1,
+                            "max": 1,
+                            "aqlPath": "/context/setting",
+                            "inputs": [
+                                {
+                                    "suffix": "code",
+                                    "type": "TEXT"
+                                },
+                                {
+                                    "suffix": "value",
+                                    "type": "TEXT"
+                                }
+                            ],
+                            "inContext": true
+                        }
+                    ]
+                },
+                {
+                    "id": "pulse_heart_beat",
+                    "name": "Pulse/Heart beat",
+                    "localizedName": "Pulse/Heart beat",
+                    "rmType": "OBSERVATION",
+                    "nodeId": "openEHR-EHR-OBSERVATION.pulse.v0",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                        "en": "Pulse/Heart beat"
+                    },
+                    "localizedDescriptions": {
+                        "en": "Record details about the rate and associated attributes for a pulse or heart beat."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.pulse.v0]",
+                    "children": [
+                        {
+                            "id": "any_event",
+                            "name": "Any event",
+                            "localizedName": "Any event",
+                            "rmType": "EVENT",
+                            "nodeId": "at0003",
+                            "min": 0,
+                            "max": -1,
+                            "localizedNames": {
+                                "en": "Any event"
+                            },
+                            "localizedDescriptions": {
+                                "en": "Default, unspecified point in time or interval event which may be explicitly defined in a template or at run-time."
+                            },
+                            "aqlPath": "/content[openEHR-EHR-OBSERVATION.pulse.v0]/data[at0002]/events[at0003]",
+                            "children": [
+                                {
+                                    "id": "heart_rate",
+                                    "name": "Heart Rate",
+                                    "localizedName": "Heart Rate",
+                                    "rmType": "DV_QUANTITY",
+                                    "nodeId": "at0004",
+                                    "min": 0,
+                                    "max": 1,
+                                    "localizedNames": {
+                                        "en": "Heart Rate"
+                                    },
+                                    "localizedDescriptions": {
+                                        "en": "The rate, measured in beats per minute."
+                                    },
+                                    "annotations": {
+                                        "comment": "Run-time name constraints have been specified, in order to simplify the renaming of this data element to Pulse Rate or Heart Rate, as required."
+                                    },
+                                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.pulse.v0]/data[at0002]/events[at0003]/data[at0001]/items[at0004,'Heart Rate']/value",
+                                    "inputs": [
+                                        {
+                                            "suffix": "magnitude",
+                                            "type": "DECIMAL",
+                                            "validation": {
+                                                "range": {
+                                                    "minOp": ">=",
+                                                    "min": 0
+                                                },
+                                                "precision": {
+                                                    "minOp": ">=",
+                                                    "min": 0,
+                                                    "maxOp": "<=",
+                                                    "max": 0
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "suffix": "unit",
+                                            "type": "CODED_TEXT",
+                                            "list": [
+                                                {
+                                                    "value": "/min",
+                                                    "label": "/min",
+                                                    "validation": {
+                                                        "range": {
+                                                            "minOp": ">=",
+                                                            "min": 0
+                                                        },
+                                                        "precision": {
+                                                            "minOp": ">=",
+                                                            "min": 0,
+                                                            "maxOp": "<=",
+                                                            "max": 0
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "time",
+                                    "name": "Time",
+                                    "rmType": "DV_DATE_TIME",
+                                    "min": 1,
+                                    "max": 1,
+                                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.pulse.v0]/data[at0002]/events[at0003]/time",
+                                    "inputs": [
+                                        {
+                                            "type": "DATETIME"
+                                        }
+                                    ],
+                                    "inContext": true
+                                }
+                            ]
+                        },
+                        {
+                            "id": "language",
+                            "name": "Language",
+                            "rmType": "CODE_PHRASE",
+                            "min": 1,
+                            "max": 1,
+                            "aqlPath": "/content[openEHR-EHR-OBSERVATION.pulse.v0]/language",
+                            "inContext": true
+                        },
+                        {
+                            "id": "encoding",
+                            "name": "Encoding",
+                            "rmType": "CODE_PHRASE",
+                            "min": 1,
+                            "max": 1,
+                            "aqlPath": "/content[openEHR-EHR-OBSERVATION.pulse.v0]/encoding",
+                            "inContext": true
+                        },
+                        {
+                            "id": "subject",
+                            "name": "Subject",
+                            "rmType": "PARTY_PROXY",
+                            "min": 1,
+                            "max": 1,
+                            "aqlPath": "/content[openEHR-EHR-OBSERVATION.pulse.v0]/subject",
+                            "inContext": true
+                        }
+                    ]
+                },
+                {
+                    "id": "indirect_oximetry",
+                    "name": "Indirect Oximetry",
+                    "localizedName": "Indirect Oximetry",
+                    "rmType": "OBSERVATION",
+                    "nodeId": "openEHR-EHR-OBSERVATION.indirect_oximetry.v1",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                        "en": "Indirect Oximetry"
+                    },
+                    "localizedDescriptions": {
+                        "en": "Method of monitoring blood gas measurements such as Spo2 and pTCO2 by indirect, currently non-invasive, means."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.indirect_oximetry.v1]",
+                    "children": [
+                        {
+                            "id": "any_event",
+                            "name": "Any Event",
+                            "localizedName": "Any Event",
+                            "rmType": "EVENT",
+                            "nodeId": "at0002",
+                            "min": 0,
+                            "max": -1,
+                            "localizedNames": {
+                                "en": "Any Event"
+                            },
+                            "localizedDescriptions": {
+                                "en": "Default, unspecified point in time or interval event which may be explicitly defined in a template or at run-time."
+                            },
+                            "aqlPath": "/content[openEHR-EHR-OBSERVATION.indirect_oximetry.v1]/data[at0001]/events[at0002]",
+                            "children": [
+                                {
+                                    "id": "spo2",
+                                    "name": "spO2",
+                                    "localizedName": "spO2",
+                                    "rmType": "DV_PROPORTION",
+                                    "nodeId": "at0006",
+                                    "min": 0,
+                                    "max": 1,
+                                    "localizedNames": {
+                                        "en": "spO2"
+                                    },
+                                    "localizedDescriptions": {
+                                        "en": "Measured via pulse oximetry, the saturation of oxygen in the peripheral blood."
+                                    },
+                                    "annotations": {
+                                        "comment": "spO2 is defined as the ratio of oxyhaemoglobin (HbO2) to the total concentration of haemoglobin (HbO2 + deoxyhaemoglobin)."
+                                    },
+                                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.indirect_oximetry.v1]/data[at0001]/events[at0002]/data[at0003]/items[at0006]/value",
+                                    "inputs": [
+                                        {
+                                            "suffix": "numerator",
+                                            "type": "DECIMAL",
+                                            "validation": {
+                                                "range": {
+                                                    "minOp": ">=",
+                                                    "min": 0,
+                                                    "maxOp": "<=",
+                                                    "max": 100
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "suffix": "denominator",
+                                            "type": "DECIMAL",
+                                            "validation": {
+                                                "range": {
+                                                    "minOp": ">=",
+                                                    "min": 100,
+                                                    "maxOp": "<=",
+                                                    "max": 100
+                                                }
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "time",
+                                    "name": "Time",
+                                    "rmType": "DV_DATE_TIME",
+                                    "min": 1,
+                                    "max": 1,
+                                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.indirect_oximetry.v1]/data[at0001]/events[at0002]/time",
+                                    "inputs": [
+                                        {
+                                            "type": "DATETIME"
+                                        }
+                                    ],
+                                    "inContext": true
+                                }
+                            ]
+                        },
+                        {
+                            "id": "language",
+                            "name": "Language",
+                            "rmType": "CODE_PHRASE",
+                            "min": 1,
+                            "max": 1,
+                            "aqlPath": "/content[openEHR-EHR-OBSERVATION.indirect_oximetry.v1]/language",
+                            "inContext": true
+                        },
+                        {
+                            "id": "encoding",
+                            "name": "Encoding",
+                            "rmType": "CODE_PHRASE",
+                            "min": 1,
+                            "max": 1,
+                            "aqlPath": "/content[openEHR-EHR-OBSERVATION.indirect_oximetry.v1]/encoding",
+                            "inContext": true
+                        },
+                        {
+                            "id": "subject",
+                            "name": "Subject",
+                            "rmType": "PARTY_PROXY",
+                            "min": 1,
+                            "max": 1,
+                            "aqlPath": "/content[openEHR-EHR-OBSERVATION.indirect_oximetry.v1]/subject",
+                            "inContext": true
+                        }
+                    ]
+                },
+                {
+                    "id": "respirations",
+                    "name": "Respirations",
+                    "localizedName": "Respirations",
+                    "rmType": "OBSERVATION",
+                    "nodeId": "openEHR-EHR-OBSERVATION.respiration.v1",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                        "en": "Respirations"
+                    },
+                    "localizedDescriptions": {
+                        "en": "The observed characteristics of spontaneous breathing as would commonly be recorded as part of a 'vital signs' examination."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.respiration.v1]",
+                    "children": [
+                        {
+                            "id": "any_event",
+                            "name": "Any event",
+                            "localizedName": "Any event",
+                            "rmType": "EVENT",
+                            "nodeId": "at0002",
+                            "min": 0,
+                            "max": -1,
+                            "localizedNames": {
+                                "en": "Any event"
+                            },
+                            "localizedDescriptions": {
+                                "en": "Generic event."
+                            },
+                            "annotations": {
+                                "view:pass_through": "true"
+                            },
+                            "aqlPath": "/content[openEHR-EHR-OBSERVATION.respiration.v1]/data[at0001]/events[at0002]",
+                            "children": [
+                                {
+                                    "id": "rate",
+                                    "name": "Rate",
+                                    "localizedName": "Rate",
+                                    "rmType": "DV_QUANTITY",
+                                    "nodeId": "at0004",
+                                    "min": 0,
+                                    "max": 1,
+                                    "localizedNames": {
+                                        "en": "Rate"
+                                    },
+                                    "localizedDescriptions": {
+                                        "en": "Rate of respiration."
+                                    },
+                                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.respiration.v1]/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value",
+                                    "inputs": [
+                                        {
+                                            "suffix": "magnitude",
+                                            "type": "DECIMAL",
+                                            "validation": {
+                                                "range": {
+                                                    "minOp": ">=",
+                                                    "min": 0,
+                                                    "maxOp": "<=",
+                                                    "max": 200
+                                                },
+                                                "precision": {
+                                                    "minOp": ">=",
+                                                    "min": 0,
+                                                    "maxOp": "<=",
+                                                    "max": 0
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "suffix": "unit",
+                                            "type": "CODED_TEXT",
+                                            "list": [
+                                                {
+                                                    "value": "/min",
+                                                    "label": "/min",
+                                                    "validation": {
+                                                        "range": {
+                                                            "minOp": ">=",
+                                                            "min": 0,
+                                                            "maxOp": "<=",
+                                                            "max": 200
+                                                        },
+                                                        "precision": {
+                                                            "minOp": ">=",
+                                                            "min": 0,
+                                                            "maxOp": "<=",
+                                                            "max": 0
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "time",
+                                    "name": "Time",
+                                    "rmType": "DV_DATE_TIME",
+                                    "min": 1,
+                                    "max": 1,
+                                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.respiration.v1]/data[at0001]/events[at0002]/time",
+                                    "inputs": [
+                                        {
+                                            "type": "DATETIME"
+                                        }
+                                    ],
+                                    "inContext": true
+                                }
+                            ]
+                        },
+                        {
+                            "id": "language",
+                            "name": "Language",
+                            "rmType": "CODE_PHRASE",
+                            "min": 1,
+                            "max": 1,
+                            "aqlPath": "/content[openEHR-EHR-OBSERVATION.respiration.v1]/language",
+                            "inContext": true
+                        },
+                        {
+                            "id": "encoding",
+                            "name": "Encoding",
+                            "rmType": "CODE_PHRASE",
+                            "min": 1,
+                            "max": 1,
+                            "aqlPath": "/content[openEHR-EHR-OBSERVATION.respiration.v1]/encoding",
+                            "inContext": true
+                        },
+                        {
+                            "id": "subject",
+                            "name": "Subject",
+                            "rmType": "PARTY_PROXY",
+                            "min": 1,
+                            "max": 1,
+                            "aqlPath": "/content[openEHR-EHR-OBSERVATION.respiration.v1]/subject",
+                            "inContext": true
+                        }
+                    ]
+                },
+                {
+                    "id": "body_temperature",
+                    "name": "Body temperature",
+                    "localizedName": "Body temperature",
+                    "rmType": "OBSERVATION",
+                    "nodeId": "openEHR-EHR-OBSERVATION.body_temperature.v1",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                        "en": "Body temperature"
+                    },
+                    "localizedDescriptions": {
+                        "en": "A measurement of the body temperature, which is a surrogate for the whole body temperature of the person."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.body_temperature.v1]",
+                    "children": [
+                        {
+                            "id": "any_event",
+                            "name": "Any event",
+                            "localizedName": "Any event",
+                            "rmType": "EVENT",
+                            "nodeId": "at0003",
+                            "min": 0,
+                            "max": -1,
+                            "localizedNames": {
+                                "en": "Any event"
+                            },
+                            "localizedDescriptions": {
+                                "en": "Any event."
+                            },
+                            "annotations": {
+                                "view:pass_through": "true"
+                            },
+                            "aqlPath": "/content[openEHR-EHR-OBSERVATION.body_temperature.v1]/data[at0002]/events[at0003]",
+                            "children": [
+                                {
+                                    "id": "temperature",
+                                    "name": "Temperature",
+                                    "localizedName": "Temperature",
+                                    "rmType": "DV_QUANTITY",
+                                    "nodeId": "at0004",
+                                    "min": 1,
+                                    "max": 1,
+                                    "localizedNames": {
+                                        "en": "Temperature"
+                                    },
+                                    "localizedDescriptions": {
+                                        "en": "The measured body temperature (as a surrogate for the whole body)."
+                                    },
+                                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.body_temperature.v1]/data[at0002]/events[at0003]/data[at0001]/items[at0004]/value",
+                                    "inputs": [
+                                        {
+                                            "suffix": "magnitude",
+                                            "type": "DECIMAL"
+                                        },
+                                        {
+                                            "suffix": "unit",
+                                            "type": "CODED_TEXT",
+                                            "list": [
+                                                {
+                                                    "value": "°C",
+                                                    "label": "°C",
+                                                    "validation": {
+                                                        "precision": {
+                                                            "minOp": ">=",
+                                                            "min": 1,
+                                                            "maxOp": "<=",
+                                                            "max": 1
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "value": "°F",
+                                                    "label": "°F",
+                                                    "validation": {
+                                                        "precision": {
+                                                            "minOp": ">=",
+                                                            "min": 1,
+                                                            "maxOp": "<=",
+                                                            "max": 1
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "time",
+                                    "name": "Time",
+                                    "rmType": "DV_DATE_TIME",
+                                    "min": 1,
+                                    "max": 1,
+                                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.body_temperature.v1]/data[at0002]/events[at0003]/time",
+                                    "inputs": [
+                                        {
+                                            "type": "DATETIME"
+                                        }
+                                    ],
+                                    "inContext": true
+                                }
+                            ]
+                        },
+                        {
+                            "id": "language",
+                            "name": "Language",
+                            "rmType": "CODE_PHRASE",
+                            "min": 1,
+                            "max": 1,
+                            "aqlPath": "/content[openEHR-EHR-OBSERVATION.body_temperature.v1]/language",
+                            "inContext": true
+                        },
+                        {
+                            "id": "encoding",
+                            "name": "Encoding",
+                            "rmType": "CODE_PHRASE",
+                            "min": 1,
+                            "max": 1,
+                            "aqlPath": "/content[openEHR-EHR-OBSERVATION.body_temperature.v1]/encoding",
+                            "inContext": true
+                        },
+                        {
+                            "id": "subject",
+                            "name": "Subject",
+                            "rmType": "PARTY_PROXY",
+                            "min": 1,
+                            "max": 1,
+                            "aqlPath": "/content[openEHR-EHR-OBSERVATION.body_temperature.v1]/subject",
+                            "inContext": true
+                        }
+                    ]
+                },
+                {
+                    "id": "blood_pressure",
+                    "name": "Blood Pressure",
+                    "localizedName": "Blood Pressure",
+                    "rmType": "OBSERVATION",
+                    "nodeId": "openEHR-EHR-OBSERVATION.blood_pressure.v1",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                        "en": "Blood Pressure"
+                    },
+                    "localizedDescriptions": {
+                        "en": "The local measurement of arterial blood pressure which is a surrogate for arterial. pressure in the systemic circulation.  Most commonly, use of the term 'blood pressure' refers to measurement of brachial artery pressure in the upper arm."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.blood_pressure.v1]",
+                    "children": [
+                        {
+                            "id": "any_event",
+                            "name": "any event",
+                            "localizedName": "any event",
+                            "rmType": "EVENT",
+                            "nodeId": "at0006",
+                            "min": 0,
+                            "max": -1,
+                            "localizedNames": {
+                                "en": "any event"
+                            },
+                            "localizedDescriptions": {
+                                "en": "Default event."
+                            },
+                            "annotations": {
+                                "view:pass_through": "true"
+                            },
+                            "aqlPath": "/content[openEHR-EHR-OBSERVATION.blood_pressure.v1]/data[at0001]/events[at0006]",
+                            "children": [
+                                {
+                                    "id": "systolic",
+                                    "name": "Systolic",
+                                    "localizedName": "Systolic",
+                                    "rmType": "DV_QUANTITY",
+                                    "nodeId": "at0004",
+                                    "min": 0,
+                                    "max": 1,
+                                    "localizedNames": {
+                                        "en": "Systolic"
+                                    },
+                                    "localizedDescriptions": {
+                                        "en": "Peak systemic arterial blood pressure  - measured in systolic or contraction phase of the heart cycle."
+                                    },
+                                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.blood_pressure.v1]/data[at0001]/events[at0006]/data[at0003]/items[at0004]/value",
+                                    "inputs": [
+                                        {
+                                            "suffix": "magnitude",
+                                            "type": "DECIMAL",
+                                            "validation": {
+                                                "range": {
+                                                    "minOp": ">=",
+                                                    "min": 0,
+                                                    "maxOp": "<",
+                                                    "max": 1000
+                                                },
+                                                "precision": {
+                                                    "minOp": ">=",
+                                                    "min": 0,
+                                                    "maxOp": "<=",
+                                                    "max": 0
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "suffix": "unit",
+                                            "type": "CODED_TEXT",
+                                            "list": [
+                                                {
+                                                    "value": "mm[Hg]",
+                                                    "label": "mm[Hg]",
+                                                    "validation": {
+                                                        "range": {
+                                                            "minOp": ">=",
+                                                            "min": 0,
+                                                            "maxOp": "<",
+                                                            "max": 1000
+                                                        },
+                                                        "precision": {
+                                                            "minOp": ">=",
+                                                            "min": 0,
+                                                            "maxOp": "<=",
+                                                            "max": 0
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "diastolic",
+                                    "name": "Diastolic",
+                                    "localizedName": "Diastolic",
+                                    "rmType": "DV_QUANTITY",
+                                    "nodeId": "at0005",
+                                    "min": 0,
+                                    "max": 1,
+                                    "localizedNames": {
+                                        "en": "Diastolic"
+                                    },
+                                    "localizedDescriptions": {
+                                        "en": "Minimum systemic arterial blood pressure - measured in the diastolic or relaxation phase of the heart cycle."
+                                    },
+                                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.blood_pressure.v1]/data[at0001]/events[at0006]/data[at0003]/items[at0005]/value",
+                                    "inputs": [
+                                        {
+                                            "suffix": "magnitude",
+                                            "type": "DECIMAL",
+                                            "validation": {
+                                                "range": {
+                                                    "minOp": ">=",
+                                                    "min": 0,
+                                                    "maxOp": "<",
+                                                    "max": 1000
+                                                },
+                                                "precision": {
+                                                    "minOp": ">=",
+                                                    "min": 0,
+                                                    "maxOp": "<=",
+                                                    "max": 0
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "suffix": "unit",
+                                            "type": "CODED_TEXT",
+                                            "list": [
+                                                {
+                                                    "value": "mm[Hg]",
+                                                    "label": "mm[Hg]",
+                                                    "validation": {
+                                                        "range": {
+                                                            "minOp": ">=",
+                                                            "min": 0,
+                                                            "maxOp": "<",
+                                                            "max": 1000
+                                                        },
+                                                        "precision": {
+                                                            "minOp": ">=",
+                                                            "min": 0,
+                                                            "maxOp": "<=",
+                                                            "max": 0
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "time",
+                                    "name": "Time",
+                                    "rmType": "DV_DATE_TIME",
+                                    "min": 1,
+                                    "max": 1,
+                                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.blood_pressure.v1]/data[at0001]/events[at0006]/time",
+                                    "inputs": [
+                                        {
+                                            "type": "DATETIME"
+                                        }
+                                    ],
+                                    "inContext": true
+                                }
+                            ]
+                        },
+                        {
+                            "id": "language",
+                            "name": "Language",
+                            "rmType": "CODE_PHRASE",
+                            "min": 1,
+                            "max": 1,
+                            "aqlPath": "/content[openEHR-EHR-OBSERVATION.blood_pressure.v1]/language",
+                            "inContext": true
+                        },
+                        {
+                            "id": "encoding",
+                            "name": "Encoding",
+                            "rmType": "CODE_PHRASE",
+                            "min": 1,
+                            "max": 1,
+                            "aqlPath": "/content[openEHR-EHR-OBSERVATION.blood_pressure.v1]/encoding",
+                            "inContext": true
+                        },
+                        {
+                            "id": "subject",
+                            "name": "Subject",
+                            "rmType": "PARTY_PROXY",
+                            "min": 1,
+                            "max": 1,
+                            "aqlPath": "/content[openEHR-EHR-OBSERVATION.blood_pressure.v1]/subject",
+                            "inContext": true
+                        }
+                    ]
+                },
+                {
+                    "id": "symptoms",
+                    "name": "Symptoms",
+                    "localizedName": "Symptoms",
+                    "rmType": "OBSERVATION",
+                    "nodeId": "openEHR-EHR-OBSERVATION.story.v1",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                        "en": "Symptoms"
+                    },
+                    "localizedDescriptions": {
+                        "en": "The subjective clinical history of the subject of care as recorded directly by the subject, or reported to a clinician by the subject or a carer."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.story.v1,'Symptoms']",
+                    "children": [
+                        {
+                            "id": "comments",
+                            "name": "Comments",
+                            "localizedName": "Comments",
+                            "rmType": "DV_TEXT",
+                            "nodeId": "at0004",
+                            "min": 0,
+                            "max": 1,
+                            "localizedNames": {
+                                "en": "Comments"
+                            },
+                            "localizedDescriptions": {
+                                "en": "Narrative description of the story or clinical history for the subject of care."
+                            },
+                            "aqlPath": "/content[openEHR-EHR-OBSERVATION.story.v1,'Symptoms']/data[at0001]/events[at0002]/data[at0003]/items[at0004,'Comments']/value",
+                            "inputs": [
+                                {
+                                    "type": "TEXT"
+                                }
+                            ]
+                        },
+                        {
+                            "id": "symptom",
+                            "name": "Symptom",
+                            "localizedName": "Symptom",
+                            "rmType": "CLUSTER",
+                            "nodeId": "openEHR-EHR-CLUSTER.symptom.v0",
+                            "min": 0,
+                            "max": -1,
+                            "localizedNames": {
+                                "en": "Symptom"
+                            },
+                            "localizedDescriptions": {
+                                "en": "Subjective observation of a physical or mental disturbance, experienced by an individual."
+                            },
+                            "aqlPath": "/content[openEHR-EHR-OBSERVATION.story.v1,'Symptoms']/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.symptom.v0]",
+                            "children": [
+                                {
+                                    "id": "symptom_name",
+                                    "name": "Symptom name",
+                                    "localizedName": "Symptom name",
+                                    "rmType": "DV_CODED_TEXT",
+                                    "nodeId": "at0001",
+                                    "min": 1,
+                                    "max": 1,
+                                    "localizedNames": {
+                                        "en": "Symptom name"
+                                    },
+                                    "localizedDescriptions": {
+                                        "en": "The symptom experienced by the subject of care."
+                                    },
+                                    "annotations": {
+                                        "comment": "Symptom name should be coded with a terminology, where possible."
+                                    },
+                                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.story.v1,'Symptoms']/data[at0001]/events[at0002]/data[at0003]/items[openEHR-EHR-CLUSTER.symptom.v0]/items[at0001]/value",
+                                    "inputs": [
+                                        {
+                                            "suffix": "code",
+                                            "type": "CODED_TEXT",
+                                            "list": [
+                                                {
+                                                    "value": "386661006",
+                                                    "label": "Fever",
+                                                    "localizedLabels": {
+                                                        "en": "Fever"
+                                                    }
+                                                },
+                                                {
+                                                    "value": "267036007",
+                                                    "label": "Breathless",
+                                                    "localizedLabels": {
+                                                        "en": "Breathless"
+                                                    }
+                                                },
+                                                {
+                                                    "value": "422587007",
+                                                    "label": "Nausea",
+                                                    "localizedLabels": {
+                                                        "en": "Nausea"
+                                                    }
+                                                },
+                                                {
+                                                    "value": "422400008",
+                                                    "label": "Vomiting",
+                                                    "localizedLabels": {
+                                                        "en": "Vomiting"
+                                                    }
+                                                },
+                                                {
+                                                    "value": "49727002",
+                                                    "label": "Cough",
+                                                    "localizedLabels": {
+                                                        "en": "Cough"
+                                                    }
+                                                },
+                                                {
+                                                    "value": "22253000",
+                                                    "label": "Pain",
+                                                    "localizedLabels": {
+                                                        "en": "Pain"
+                                                    }
+                                                }
+                                            ],
+                                            "terminology": "snomed-ct"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": "time",
+                            "name": "Time",
+                            "rmType": "DV_DATE_TIME",
+                            "min": 1,
+                            "max": 1,
+                            "aqlPath": "/content[openEHR-EHR-OBSERVATION.story.v1,'Symptoms']/data[at0001]/events[at0002]/time",
+                            "inputs": [
+                                {
+                                    "type": "DATETIME"
+                                }
+                            ],
+                            "inContext": true
+                        },
+                        {
+                            "id": "language",
+                            "name": "Language",
+                            "rmType": "CODE_PHRASE",
+                            "min": 1,
+                            "max": 1,
+                            "aqlPath": "/content[openEHR-EHR-OBSERVATION.story.v1,'Symptoms']/language",
+                            "inContext": true
+                        },
+                        {
+                            "id": "encoding",
+                            "name": "Encoding",
+                            "rmType": "CODE_PHRASE",
+                            "min": 1,
+                            "max": 1,
+                            "aqlPath": "/content[openEHR-EHR-OBSERVATION.story.v1,'Symptoms']/encoding",
+                            "inContext": true
+                        },
+                        {
+                            "id": "subject",
+                            "name": "Subject",
+                            "rmType": "PARTY_PROXY",
+                            "min": 1,
+                            "max": 1,
+                            "aqlPath": "/content[openEHR-EHR-OBSERVATION.story.v1,'Symptoms']/subject",
+                            "inContext": true
+                        }
+                    ]
+                },
+                {
+                    "id": "howru_score",
+                    "name": "howRU score",
+                    "localizedName": "howRU score",
+                    "rmType": "OBSERVATION",
+                    "nodeId": "openEHR-EHR-OBSERVATION.howru.v1",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                        "en": "howRU score"
+                    },
+                    "localizedDescriptions": {
+                        "en": "Information captured by the howRU™ patient-reported outcomes instrument."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-OBSERVATION.howru.v1]",
+                    "children": [
+                        {
+                            "id": "pain_or_discomfort",
+                            "name": "Pain or discomfort",
+                            "localizedName": "Pain or discomfort",
+                            "rmType": "DV_ORDINAL",
+                            "nodeId": "at0044",
+                            "min": 1,
+                            "max": 1,
+                            "localizedNames": {
+                                "en": "Pain or discomfort"
+                            },
+                            "localizedDescriptions": {
+                                "en": "Symptoms such as pain – includes all physical forms of discomfort such as breathlessness, itching, dizziness or nausea."
+                            },
+                            "aqlPath": "/content[openEHR-EHR-OBSERVATION.howru.v1]/data[at0001]/events[at0002]/data[at0003]/items[at0044]/value",
+                            "inputs": [
+                                {
+                                    "type": "CODED_TEXT",
+                                    "list": [
+                                        {
+                                            "value": "at0040",
+                                            "label": "none",
+                                            "localizedLabels": {
+                                                "en": "none"
+                                            },
+                                            "localizedDescriptions": {
+                                                "en": "The subject is not affected at all."
+                                            },
+                                            "ordinal": 0
+                                        },
+                                        {
+                                            "value": "at0041",
+                                            "label": "slight",
+                                            "localizedLabels": {
+                                                "en": "slight"
+                                            },
+                                            "localizedDescriptions": {
+                                                "en": "The subject is only slighly affected."
+                                            },
+                                            "ordinal": 1
+                                        },
+                                        {
+                                            "value": "at0042",
+                                            "label": "quite a lot",
+                                            "localizedLabels": {
+                                                "en": "quite a lot"
+                                            },
+                                            "localizedDescriptions": {
+                                                "en": "The subject is considerably affected."
+                                            },
+                                            "ordinal": 2
+                                        },
+                                        {
+                                            "value": "at0043",
+                                            "label": "extreme",
+                                            "localizedLabels": {
+                                                "en": "extreme"
+                                            },
+                                            "localizedDescriptions": {
+                                                "en": "The subject is extremely affected."
+                                            },
+                                            "ordinal": 3
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": "feeling_low_or_worried",
+                            "name": "Feeling low or worried",
+                            "localizedName": "Feeling low or worried",
+                            "rmType": "DV_ORDINAL",
+                            "nodeId": "at0008",
+                            "min": 1,
+                            "max": 1,
+                            "localizedNames": {
+                                "en": "Feeling low or worried"
+                            },
+                            "localizedDescriptions": {
+                                "en": "Feeling low or worried – includes all psychological states, including anxiety, feeling low and depression."
+                            },
+                            "aqlPath": "/content[openEHR-EHR-OBSERVATION.howru.v1]/data[at0001]/events[at0002]/data[at0003]/items[at0008]/value",
+                            "inputs": [
+                                {
+                                    "type": "CODED_TEXT",
+                                    "list": [
+                                        {
+                                            "value": "at0040",
+                                            "label": "none",
+                                            "localizedLabels": {
+                                                "en": "none"
+                                            },
+                                            "localizedDescriptions": {
+                                                "en": "The subject is not affected at all."
+                                            },
+                                            "ordinal": 0
+                                        },
+                                        {
+                                            "value": "at0041",
+                                            "label": "slight",
+                                            "localizedLabels": {
+                                                "en": "slight"
+                                            },
+                                            "localizedDescriptions": {
+                                                "en": "The subject is only slighly affected."
+                                            },
+                                            "ordinal": 1
+                                        },
+                                        {
+                                            "value": "at0042",
+                                            "label": "quite a lot",
+                                            "localizedLabels": {
+                                                "en": "quite a lot"
+                                            },
+                                            "localizedDescriptions": {
+                                                "en": "The subject is considerably affected."
+                                            },
+                                            "ordinal": 2
+                                        },
+                                        {
+                                            "value": "at0043",
+                                            "label": "extreme",
+                                            "localizedLabels": {
+                                                "en": "extreme"
+                                            },
+                                            "localizedDescriptions": {
+                                                "en": "The subject is extremely affected."
+                                            },
+                                            "ordinal": 3
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": "limited_in_what_i_can_do",
+                            "name": "Limited in what I can do",
+                            "localizedName": "Limited in what I can do",
+                            "rmType": "DV_ORDINAL",
+                            "nodeId": "at0039",
+                            "min": 1,
+                            "max": 1,
+                            "localizedNames": {
+                                "en": "Limited in what I can do"
+                            },
+                            "localizedDescriptions": {
+                                "en": "Limited in what I can do – includes incapacity due to physical or psychological reasons, such as not being able to perform activities of daily living, or not being able to carry out leisure activities."
+                            },
+                            "aqlPath": "/content[openEHR-EHR-OBSERVATION.howru.v1]/data[at0001]/events[at0002]/data[at0003]/items[at0039]/value",
+                            "inputs": [
+                                {
+                                    "type": "CODED_TEXT",
+                                    "list": [
+                                        {
+                                            "value": "at0040",
+                                            "label": "none",
+                                            "localizedLabels": {
+                                                "en": "none"
+                                            },
+                                            "localizedDescriptions": {
+                                                "en": "The subject is not affected at all."
+                                            },
+                                            "ordinal": 0
+                                        },
+                                        {
+                                            "value": "at0041",
+                                            "label": "slight",
+                                            "localizedLabels": {
+                                                "en": "slight"
+                                            },
+                                            "localizedDescriptions": {
+                                                "en": "The subject is only slighly affected."
+                                            },
+                                            "ordinal": 1
+                                        },
+                                        {
+                                            "value": "at0042",
+                                            "label": "quite a lot",
+                                            "localizedLabels": {
+                                                "en": "quite a lot"
+                                            },
+                                            "localizedDescriptions": {
+                                                "en": "The subject is considerably affected."
+                                            },
+                                            "ordinal": 2
+                                        },
+                                        {
+                                            "value": "at0043",
+                                            "label": "extreme",
+                                            "localizedLabels": {
+                                                "en": "extreme"
+                                            },
+                                            "localizedDescriptions": {
+                                                "en": "The subject is extremely affected."
+                                            },
+                                            "ordinal": 3
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": "dependent_on_others",
+                            "name": "Dependent on others",
+                            "localizedName": "Dependent on others",
+                            "rmType": "DV_ORDINAL",
+                            "nodeId": "at0006",
+                            "min": 1,
+                            "max": 1,
+                            "localizedNames": {
+                                "en": "Dependent on others"
+                            },
+                            "localizedDescriptions": {
+                                "en": "Dependent on others – the need to rely on other people or equipment."
+                            },
+                            "aqlPath": "/content[openEHR-EHR-OBSERVATION.howru.v1]/data[at0001]/events[at0002]/data[at0003]/items[at0006]/value",
+                            "inputs": [
+                                {
+                                    "type": "CODED_TEXT",
+                                    "list": [
+                                        {
+                                            "value": "at0040",
+                                            "label": "none",
+                                            "localizedLabels": {
+                                                "en": "none"
+                                            },
+                                            "localizedDescriptions": {
+                                                "en": "The subject is not affected at all."
+                                            },
+                                            "ordinal": 0
+                                        },
+                                        {
+                                            "value": "at0041",
+                                            "label": "slight",
+                                            "localizedLabels": {
+                                                "en": "slight"
+                                            },
+                                            "localizedDescriptions": {
+                                                "en": "The subject is only slighly affected."
+                                            },
+                                            "ordinal": 1
+                                        },
+                                        {
+                                            "value": "at0042",
+                                            "label": "quite a lot",
+                                            "localizedLabels": {
+                                                "en": "quite a lot"
+                                            },
+                                            "localizedDescriptions": {
+                                                "en": "The subject is considerably affected."
+                                            },
+                                            "ordinal": 2
+                                        },
+                                        {
+                                            "value": "at0043",
+                                            "label": "extreme",
+                                            "localizedLabels": {
+                                                "en": "extreme"
+                                            },
+                                            "localizedDescriptions": {
+                                                "en": "The subject is extremely affected."
+                                            },
+                                            "ordinal": 3
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": "summary_score",
+                            "name": "Summary score",
+                            "localizedName": "Summary score",
+                            "rmType": "DV_COUNT",
+                            "nodeId": "at0004",
+                            "min": 1,
+                            "max": 1,
+                            "localizedNames": {
+                                "en": "Summary score"
+                            },
+                            "localizedDescriptions": {
+                                "en": "An overall score combining the 4 individual ratings. "
+                            },
+                            "aqlPath": "/content[openEHR-EHR-OBSERVATION.howru.v1]/data[at0001]/events[at0002]/data[at0003]/items[at0004]/value",
+                            "inputs": [
+                                {
+                                    "type": "INTEGER",
+                                    "validation": {
+                                        "range": {
+                                            "minOp": ">=",
+                                            "min": 0,
+                                            "maxOp": "<=",
+                                            "max": 12
+                                        }
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "id": "time",
+                            "name": "Time",
+                            "rmType": "DV_DATE_TIME",
+                            "min": 1,
+                            "max": 1,
+                            "aqlPath": "/content[openEHR-EHR-OBSERVATION.howru.v1]/data[at0001]/events[at0002]/time",
+                            "inputs": [
+                                {
+                                    "type": "DATETIME"
+                                }
+                            ],
+                            "inContext": true
+                        },
+                        {
+                            "id": "language",
+                            "name": "Language",
+                            "rmType": "CODE_PHRASE",
+                            "min": 1,
+                            "max": 1,
+                            "aqlPath": "/content[openEHR-EHR-OBSERVATION.howru.v1]/language",
+                            "inContext": true
+                        },
+                        {
+                            "id": "encoding",
+                            "name": "Encoding",
+                            "rmType": "CODE_PHRASE",
+                            "min": 1,
+                            "max": 1,
+                            "aqlPath": "/content[openEHR-EHR-OBSERVATION.howru.v1]/encoding",
+                            "inContext": true
+                        },
+                        {
+                            "id": "subject",
+                            "name": "Subject",
+                            "rmType": "PARTY_PROXY",
+                            "min": 1,
+                            "max": 1,
+                            "aqlPath": "/content[openEHR-EHR-OBSERVATION.howru.v1]/subject",
+                            "inContext": true
+                        }
+                    ]
+                },
+                {
+                    "id": "composer",
+                    "name": "Composer",
+                    "rmType": "PARTY_PROXY",
+                    "min": 1,
+                    "max": 1,
+                    "aqlPath": "/composer",
+                    "inContext": true
+                }
+            ]
+        }
+    }
+}

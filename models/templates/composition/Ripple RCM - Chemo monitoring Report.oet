@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <template xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="openEHR/v1/Template">
-  <id>4d61f76e-c9a5-4354-971a-f3165fed161e</id>
-  <name>RCM - Chemo monitoring Report</name>
+  <id>d680031b-865c-400d-85db-a821a2fe773e</id>
+  <name>Ripple RCM - Chemo monitoring Report</name>
   <description>
     <lifecycle_state>Initial</lifecycle_state>
     <details>
@@ -172,7 +172,7 @@
         <Rule path="/items[at0163]" max="0" />
       </Items>
     </Content>
-    <Content xsi:type="OBSERVATION" archetype_id="openEHR-EHR-OBSERVATION.mascc_risk_score.v0" concept_name="MASCC risk score" max="1" path="/content">
+    <Content xsi:type="OBSERVATION" archetype_id="openEHR-EHR-OBSERVATION.mascc_risk_score.v0" concept_name="MASCC risk score" max="0" path="/content">
       <Rule path="/data[at0001]" hide_on_form="true" />
       <Rule path="/data[at0001]/events[at0002]" hide_on_form="true" />
       <Rule path="/data[at0001]/events[at0002]/data[at0003]" hide_on_form="true" />
@@ -184,6 +184,9 @@
       <Rule path="/data[at0001]/events[at0002]/data[at0003]/items[at0014]" max="0" />
       <Rule path="/data[at0001]/events[at0002]/data[at0003]/items[at0017]" max="0" />
       <Rule path="/data[at0001]/events[at0002]/data[at0003]/items[at0020]" max="0" />
+    </Content>
+    <Content xsi:type="OBSERVATION" archetype_id="openEHR-EHR-OBSERVATION.howru.v1" concept_name="howRU score" max="1" path="/content">
+      <Rule path="/data[at0001]" hide_on_form="true" />
     </Content>
     <Context>
       <Rule path="/context/other_context[at0001]" hide_on_form="true" />
@@ -218,5 +221,8 @@
   </integrity_checks>
   <integrity_checks xsi:type="ArchetypeIntegrity" archetype_id="openEHR-EHR-OBSERVATION.mascc_risk_score.v0">
     <digest id="MD5-CAM-1.0.1">757354EC699E0A5E1AB2F82CDA163B76</digest>
+  </integrity_checks>
+  <integrity_checks xsi:type="ArchetypeIntegrity" archetype_id="openEHR-EHR-OBSERVATION.howru.v1">
+    <digest id="MD5-CAM-1.0.1">C52023F71787B1E5D9DB0A72339221DE</digest>
   </integrity_checks>
 </template>

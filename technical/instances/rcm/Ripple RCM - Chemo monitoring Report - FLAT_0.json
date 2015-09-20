@@ -26,5 +26,17 @@
     "patient_remote_chemo_monitoring/blood_pressure:0/any_event:2/diastolic|magnitude": 72,
     "patient_remote_chemo_monitoring/blood_pressure:0/any_event:2/diastolic|unit": "mm[Hg]",
     "patient_remote_chemo_monitoring/symptoms/comments": "Feeling fine",
-		"patient_remote_chemo_monitoring/mascc_risk_score/mascc_risk_score": 25
+	  "patient_remote_chemo_monitoring/howru_score/pain_or_discomfort|code": "at0042",
+	   "patient_remote_chemo_monitoring/howru_score/pain_or_discomfort|value": "quite a lot",
+	   "patient_remote_chemo_monitoring/howru_score/pain_or_discomfort|ordinal": 2,
+	   "patient_remote_chemo_monitoring/howru_score/feeling_low_or_worried|code": "at0041",
+	   "patient_remote_chemo_monitoring/howru_score/feeling_low_or_worried|value": "slight",
+	   "patient_remote_chemo_monitoring/howru_score/feeling_low_or_worried|ordinal": 1,
+	   "patient_remote_chemo_monitoring/howru_score/limited_in_what_i_can_do|code": "at0041",
+	   "patient_remote_chemo_monitoring/howru_score/limited_in_what_i_can_do|value": "slight",
+	   "patient_remote_chemo_monitoring/howru_score/limited_in_what_i_can_do|ordinal": 1,
+	   "patient_remote_chemo_monitoring/howru_score/dependent_on_others|code": "at0041",
+	   "patient_remote_chemo_monitoring/howru_score/dependent_on_others|value": "slight",
+	   "patient_remote_chemo_monitoring/howru_score/dependent_on_others|ordinal": 1,
+	   "patient_remote_chemo_monitoring/howru_score/summary_score": 5
 }
