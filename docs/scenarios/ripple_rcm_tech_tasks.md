@@ -15,9 +15,6 @@ The steps covered are...
 
 * Close the Ehrscape Session
 
-* Other API services
- * Access the Indizen SNOMED CT Terminology browser service  
-
 The baseURL for all Ehrscape API calls is https://ehrscape.code-4-health.org
 
 ### API parameter convenstions
