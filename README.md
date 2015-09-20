@@ -1,6 +1,6 @@
 # NHS C4H:Ripple Remote Chemotherapy Monitoring Challenge
 
-## The RCM Remote Chemotherapy Monitoring scenario 
+## The RCM Remote Chemotherapy Monitoring scenario
 
 This scenario represents the key clinical information typically recorded and updated as part of routine monitoring of patients who are on chemotherapy.
 
@@ -13,7 +13,7 @@ This scenario represents the key clinical information typically recorded and upd
 
 2. A [Workspace.md](/workspace.md) file containing details of key domain identifiers and assets e.g. dummy patient identifiers, template names, login and password details for the c4h_rcm domain.
 
-3. A [local repository](/models) of openEHR archetypes and templates. These archetypes and templates have assembled partly from remote repositories such as the [openEHR Foundation CKM](http://openehr.org/ckm) repository, or [UK Clinical Models](http://clinicmodels.org.uk) repository. Other artefacts, in particular the openEHR templates, have been authored locally and are maintained along with copies of the required archetypes in this Git repository. The key templates is ..
+3. A [local repository](/models) of openEHR archetypes and templates. These archetypes and templates have assembled partly from remote repositories such as the [openEHR Foundation CKM](http://openehr.org/ckm) repository, or [UK Clinical Models](http://clinicmodels.org.uk) repository. Other artefacts, in particular the openEHR templates, have been authored locally and are maintained along with copies of the required archetypes in this Git repository. The key template is ..
 
 	``Ripple RCM Patient Monitoring Report`` - the regular report sent by the patient to the monitoring unit.
 
